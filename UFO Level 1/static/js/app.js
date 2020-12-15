@@ -1,13 +1,16 @@
 // from data.js
 var tableData = data;
 
+// Select tbody element where table exists
 var tbody = d3.select("tbody");
 console.log(data);
 
+// Log each iteration of array
 data.forEach(function(ufosighting) {
     console.log(ufosighting);
 });
 
+// Add each row to HTML table
 data.forEach(function(ufosighting) {
     console.log(ufosighting); 
     var row = tbody.append("tr");
@@ -17,6 +20,7 @@ data.forEach(function(ufosighting) {
     });
 });
 
+// Input data into created HTML rows
 data.forEach(function(ufosighting) {
     console.log(ufosighting);
     var row = tbody.append("tr");
@@ -27,3 +31,29 @@ data.forEach(function(ufosighting) {
         cell.text(value);
     });
 });
+// Create variables for filter function
+var inputField = d3.select("#form");
+var button = d3.select("#filter-btn");
+
+var table = d3.select("table table-striped");
+
+// Create event handlers
+button.on("click", runEnter);
+inputField.on("submit", runEnter);
+
+// Create event function and log results
+function runEnter() {
+    d3.event.preventDefault();
+    
+    var inputElement = d3.select("#datetime");
+    var inputValue = inputElement.property("value");
+
+    console.log(inputValue);
+
+    var filteredData = data.filter(data => data.datetime === inputValue);
+    
+    console.log(filteredData);
+    
+    
+};
+
