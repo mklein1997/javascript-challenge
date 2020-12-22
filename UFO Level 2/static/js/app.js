@@ -70,18 +70,42 @@ function runEnter() {
     
 };
 
-// Create function to display filtered rows on page
 
-  updateTable(data); 
+// Create filter function to filter based on dropdown criteria.
+  updateTable(data);
   button.on("click", function() {
-    // When filter is click
-    // Filter data by datetime and update the table
-    var inputElement = d3.select("#datetime");
+    var filterElement = d3.select("#selData");
+    var filterValue = filterElement.property("value");
+
+    var inputElement = d3.select("#citystate");
     var inputValue = inputElement.property("value");
 
-    var filteredData = data.filter(data => data.datetime === inputValue);
+    var filteredData = {}
+
+    if (filterValue === 'datetime') {
+      filteredData = data.filter(data => data.datetime === inputValue);
+    }
+
+    if (filterValue === 'city') {
+      filteredData = data.filter(data => data.city === inputValue);
+    }
+
+    if (filterValue === 'state') {
+      filteredData = data.filter(data => data.state === inputValue);
+    }
+
+    if (filterValue === 'country') {
+      filteredData = data.filter(data => data.state === inputValue);
+    }
+
+    if (filterValue === 'shape') {
+      filteredData = data.filter(data => data.shape === inputValue);
+    }
+
+    else if (filterValue === 'selData') {
+      console.log("Select a filter option.")
+    }
 
     updateTable(filteredData);
+    console.log(filteredData);
   });
-
-  
